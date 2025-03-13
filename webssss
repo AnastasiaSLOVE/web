@@ -1,1 +1,62 @@
-https://docs.google.com/presentation/d/1BBTV9AyMSTVkVFGiiLiY6_mXUzm4fjKvnIBkq8aZs3g/edit?usp=sharing
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $score = 0;
+  
+    if ($_POST["q0"] == "Да") {
+        $score++;
+    }
+    if ($_POST["q1"] == "echo") {
+        $score++;
+    }
+    if ($_POST["q2"] == "Да") {
+        $score++;
+    }
+    
+    echo "<h2>Ваш результат: $score из 3</h2>";
+    echo '<a href="' . $_SERVER["PHP_SELF"] . '">Пройти заново</a>';
+    exit;
+}
+?>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Простой тест (без автоматизма)</title>
+</head>
+<body>
+
+<h2>Пройдите тест</h2>
+<form method="post">
+
+    <p>1. PHP — это язык программирования?</p>
+    <label>
+        <input type="radio" name="q0" value="Да" required> Да
+    </label>
+    <label>
+        <input type="radio" name="q0" value="Нет" required> Нет
+    </label>
+
+    <p>2. Какая команда выводит текст в PHP?</p>
+    <label>
+        <input type="radio" name="q1" value="echo" required> echo
+    </label>
+    <label>
+        <input type="radio" name="q1" value="print" required> print
+    </label>
+
+    <p>3. PHP — это серверный язык?</p>
+    <label>
+        <input type="radio" name="q2" value="Да" required> Да
+    </label>
+    <label>
+        <input type="radio" name="q2" value="Нет" required> Нет
+    </label>
+
+    <br><br>
+    <button type="submit">Отправить</button>
+</form>
+</body>
+</html>
+
