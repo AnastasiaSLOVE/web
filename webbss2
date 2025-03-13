@@ -1,0 +1,43 @@
+<?php
+$questions = [
+    ["text" => "PHP — это язык программирования?", "options" => ["Да", "Нет"], "correct" => "Да"],
+    ["text" => "Какая команда выводит текст в PHP?", "options" => ["echo", "print"], "correct" => "echo"],
+    ["text" => "PHP — это серверный язык?", "options" => ["Да", "Нет"], "correct" => "Да"]
+];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $score = 0;
+    foreach ($questions as $index => $question) {
+        if ($_POST["q$index"] == $question["correct"]) {
+            $score++;
+        }
+    }
+    echo "<h2>Ваш результат: $score из " . count($questions) . "</h2>";
+    echo '<a href="' . $_SERVER["PHP_SELF"] . '">Пройти заново</a>';
+    exit;
+}
+?>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест с массивом</title>
+</head>
+<body>
+<h2>Пройдите тест</h2>
+<form method="post">
+    <?php foreach ($questions as $index => $question): ?>
+        <p><?= $question["text"] ?></p>
+        <?php foreach ($question["options"] as $option): ?>
+            <label>
+                <input type="radio" name="q<?= $index ?>" value="<?= $option ?>" required> <?= $option ?>
+            </label>
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+
+    <br><br>
+    <button type="submit">Отправить</button>
+</form>
+
+</body>
+</html>
+
